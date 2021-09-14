@@ -4,7 +4,7 @@ on:
   pull_request:
 
 env: 
-  - OPA_VERSION: "v0.32.0"
+  OPA_VERSION: "v0.32.0"
 jobs:
   lint:
     runs-on: ubuntu-latest
