@@ -1,0 +1,29 @@
+name: Rego lint and test
+on:
+  workflow_dispatch:
+  pull_request:
+
+env: 
+  - OPA_VERSION: "v0.32.0"
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2 
+      - name: Install Opa
+        run: |
+          curl -L -o opa https://openpolicyagent.org/downloads/${OPA_VERSION}/opa_linux_amd64_static \
+          && chmod +x opa \
+          && mv opa bin/opa \
+          && echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH 
+            - name: OPA Format
+        run: |
+          files=$(opa fmt --list .)
+          if [ -n "$files" ]; then
+            echo "=== The following files are not formatted ==="
+            echo "$files"
+            exit 1
+          fi
+      - name: OPA Test aws_terraform rules
+        run: opa test -v aws_terraform/
