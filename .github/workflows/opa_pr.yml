@@ -11,12 +11,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2 
+      - name: Make bin folder
+        run: |
+          mkdir -p bin
+          echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
       - name: Install Opa
         run: |
           curl -L -o opa https://openpolicyagent.org/downloads/${OPA_VERSION}/opa_linux_amd64_static \
           && chmod +x opa \
           && mv opa bin/opa \
-          && echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH 
       - name: OPA Format
         run: |
           files=$(opa fmt --list .)
