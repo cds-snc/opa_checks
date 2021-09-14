@@ -6,7 +6,7 @@ on:
 env: 
   OPA_VERSION: "v0.32.0"
 jobs:
-  lint:
+  lint-and-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
