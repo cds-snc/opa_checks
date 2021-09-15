@@ -12,7 +12,7 @@
 Run the following command to run opa tests:
 
 ```bash
-  opa test -v ./aws_terraform
+  make test
 ```
 
 Run the following command to run conftest against an example tf.plan:
