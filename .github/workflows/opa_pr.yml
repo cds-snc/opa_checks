@@ -22,11 +22,11 @@ jobs:
           && mv opa bin/opa \
       - name: OPA Format
         run: |
-          files=$(opa fmt --list .)
+          files=$(make fmt-ci)
           if [ -n "$files" ]; then
             echo "=== The following files are not formatted ==="
             echo "$files"
             exit 1
           fi
       - name: OPA Test aws_terraform rules
-        run: opa test -v aws_terraform/
+        run: make test
