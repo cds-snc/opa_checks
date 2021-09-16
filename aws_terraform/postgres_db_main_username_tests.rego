@@ -1,7 +1,6 @@
 package tests
 
-import data.main as main 
-
+import data.main as main
 
 test_username_not_reserved {
 	r := main.deny_postgres_main_username_reserved with input as {"resource_changes": [{
@@ -21,7 +20,7 @@ test_username_reserved {
 	}]}
 
 	count(r) == 1
-  r[_] == "Postgresql main username cannot be reserved word: [\"foo\"]"
+	r[_] == "Postgresql main username cannot be reserved word: [\"foo\"]"
 }
 
 test_username_long {
@@ -32,7 +31,7 @@ test_username_long {
 	}]}
 
 	count(r) == 1
-  r[_] == "Postgresql main username > 16 characters: [\"foo\"]"
+	r[_] == "Postgresql main username > 16 characters: [\"foo\"]"
 }
 
 test_username_valid_length {
@@ -53,7 +52,7 @@ test_username_invalid_start {
 	}]}
 
 	count(r) == 1
-  r[_] == "Postgresql main username must start with a letter: [\"foo\"]"
+	r[_] == "Postgresql main username must start with a letter: [\"foo\"]"
 }
 
 test_username_valid_start {

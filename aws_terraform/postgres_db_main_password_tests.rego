@@ -1,6 +1,6 @@
 package tests
 
-import data.main as main 
+import data.main as main
 
 test_password_not_reserved {
 	r := main.deny_postgres_main_password_reserved with input as {"resource_changes": [{
@@ -20,7 +20,7 @@ test_password_reserved {
 	}]}
 
 	count(r) == 1
-  r[_] == "Postgresql main password cannot be reserved word: [\"foo\"]"
+	r[_] == "Postgresql main password cannot be reserved word: [\"foo\"]"
 }
 
 test_password_too_short {
@@ -31,7 +31,7 @@ test_password_too_short {
 	}]}
 
 	count(r) == 1
-  r[_] == "Postgresql main password > 8 characters: [\"foo\"]"
+	r[_] == "Postgresql main password > 8 characters: [\"foo\"]"
 }
 
 test_password_valid_length {
@@ -52,7 +52,7 @@ test_password_invalid_char_at {
 	}]}
 
 	count(r) == 1
-  r[_] == "Postgresql main password must not contain / @ or \": [\"foo\"]"
+	r[_] == "Postgresql main password must not contain / @ or \": [\"foo\"]"
 }
 
 test_password_invalid_char_slash {
@@ -63,7 +63,7 @@ test_password_invalid_char_slash {
 	}]}
 
 	count(r) == 1
-  r[_] == "Postgresql main password must not contain / @ or \": [\"foo\"]"
+	r[_] == "Postgresql main password must not contain / @ or \": [\"foo\"]"
 }
 
 test_password_invalid_char_quotation_mark {
@@ -74,7 +74,7 @@ test_password_invalid_char_quotation_mark {
 	}]}
 
 	count(r) == 1
-  r[_] == "Postgresql main password must not contain / @ or \": [\"foo\"]"
+	r[_] == "Postgresql main password must not contain / @ or \": [\"foo\"]"
 }
 
 test_password_valid_char {

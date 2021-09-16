@@ -1,6 +1,5 @@
 package main
 
-
 databases_with_invalid_names[r] = resources {
 	some r
 

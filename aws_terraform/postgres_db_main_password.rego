@@ -1,10 +1,10 @@
 package main
 
 main_password_invalid_chars[r] = resources {
-  changes := input.resource_changes[r]
+	changes := input.resource_changes[r]
 	resources := [address |
 		address := changes.address
-    regex.match("[/\"@]+", changes.change.after.master_password)
+		regex.match("[/\"@]+", changes.change.after.master_password)
 	]
 }
 
@@ -19,8 +19,9 @@ main_password_too_short[r] = resources {
 	resources := [address |
 		address := changes.address
 		changes.type == "aws_rds_cluster"
+
 		# needs to be 9 to account for the end of the string
-    count(changes.change.after.master_password) < 9
+		count(changes.change.after.master_password) < 9
 	]
 }
 
@@ -35,7 +36,7 @@ main_password_reserved_words[r] = resources {
 	resources := [address |
 		address := changes.address
 		changes.type == "aws_rds_cluster"
-    reserved_words[upper(changes.change.after.master_password)]
+		reserved_words[upper(changes.change.after.master_password)]
 	]
 }
 

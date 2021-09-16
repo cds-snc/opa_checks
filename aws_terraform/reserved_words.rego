@@ -1,4 +1,4 @@
-package main 
+package main
 
 reserved_words = {
 	"ALL",
