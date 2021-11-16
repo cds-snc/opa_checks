@@ -14,6 +14,15 @@ test_has_common_tags {
 	count(r) == 0
 }
 
+test_has_default_tags_set {
+	r := main.warn_tags with input as {"configuration": {"provider_config": {"aws": {"expressions": {"default_tags": [{"tags": {"ConstantValue": {
+		"Terraform": "true",
+		"ConstCentre": "test",
+	}}}]}}}}}
+
+	count(r) == 0
+}
+
 test_missing_common_tags {
 	r := main.warn_tags with input as {"resource_changes": [{
 		"address": "foo",
