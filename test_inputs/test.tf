@@ -11,6 +11,12 @@ terraform {
 
 provider "aws" {
   region = "ca-central-1"
+  default_tags {
+   tags = {
+     Terraform  = "True"
+     CostCentre = "foo"
+   }
+  }
 }
 
 module "vpc" { 
@@ -19,6 +25,14 @@ module "vpc" {
   billing_tag_value = "cal"
   high_availability = true
   enable_eip = false
+}
+resource "aws_ecr_repository" "foo" {
+  name                 = "bar"
+  image_tag_mutability = "MUTABLE"
+
+  image_scanning_configuration {
+    scan_on_push = true
+  }
 }
 
 module "rds" {

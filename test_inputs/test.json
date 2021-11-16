@@ -3,6 +3,35 @@
   "terraform_version": "1.0.6",
   "planned_values": {
     "root_module": {
+      "resources": [
+        {
+          "address": "aws_ecr_repository.foo",
+          "mode": "managed",
+          "type": "aws_ecr_repository",
+          "name": "foo",
+          "provider_name": "registry.terraform.io/hashicorp/aws",
+          "schema_version": 0,
+          "values": {
+            "encryption_configuration": [],
+            "image_scanning_configuration": [
+              {
+                "scan_on_push": true
+              }
+            ],
+            "image_tag_mutability": "MUTABLE",
+            "name": "bar",
+            "tags": null,
+            "timeouts": null
+          },
+          "sensitive_values": {
+            "encryption_configuration": [],
+            "image_scanning_configuration": [
+              {}
+            ],
+            "tags_all": {}
+          }
+        }
+      ],
       "child_modules": [
         {
           "resources": [
@@ -143,9 +172,17 @@
                 "name": "test-rdsReadConnectionString",
                 "name_prefix": null,
                 "path": "/",
-                "tags": null
+                "tags": {
+                  "CostCentre": "cal",
+                  "Terraform": "true"
+                },
+                "tags_all": {
+                  "CostCentre": "cal",
+                  "Terraform": "true"
+                }
               },
               "sensitive_values": {
+                "tags": {},
                 "tags_all": {}
               }
             },
@@ -1485,6 +1522,50 @@
   },
   "resource_changes": [
     {
+      "address": "aws_ecr_repository.foo",
+      "mode": "managed",
+      "type": "aws_ecr_repository",
+      "name": "foo",
+      "provider_name": "registry.terraform.io/hashicorp/aws",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "encryption_configuration": [],
+          "image_scanning_configuration": [
+            {
+              "scan_on_push": true
+            }
+          ],
+          "image_tag_mutability": "MUTABLE",
+          "name": "bar",
+          "tags": null,
+          "timeouts": null
+        },
+        "after_unknown": {
+          "arn": true,
+          "encryption_configuration": [],
+          "id": true,
+          "image_scanning_configuration": [
+            {}
+          ],
+          "registry_id": true,
+          "repository_url": true,
+          "tags_all": true
+        },
+        "before_sensitive": false,
+        "after_sensitive": {
+          "encryption_configuration": [],
+          "image_scanning_configuration": [
+            {}
+          ],
+          "tags_all": {}
+        }
+      }
+    },
+    {
       "address": "module.rds.aws_cloudwatch_log_group.proxy",
       "module_address": "module.rds",
       "mode": "managed",
@@ -1707,17 +1788,26 @@
           "name": "test-rdsReadConnectionString",
           "name_prefix": null,
           "path": "/",
-          "tags": null
+          "tags": {
+            "CostCentre": "cal",
+            "Terraform": "true"
+          },
+          "tags_all": {
+            "CostCentre": "cal",
+            "Terraform": "true"
+          }
         },
         "after_unknown": {
           "arn": true,
           "id": true,
           "policy": true,
           "policy_id": true,
-          "tags_all": true
+          "tags": {},
+          "tags_all": {}
         },
         "before_sensitive": false,
         "after_sensitive": {
+          "tags": {},
           "tags_all": {}
         }
       }
@@ -3991,7 +4081,7 @@
     "provider_config": {
       "aws": {
         "name": "aws",
-        "version_constraint": "~\u003e 3.37",
+        "version_constraint": "~> 3.37",
         "expressions": {
           "region": {
             "constant_value": "ca-central-1"
@@ -4000,6 +4090,31 @@
       }
     },
     "root_module": {
+      "resources": [
+        {
+          "address": "aws_ecr_repository.foo",
+          "mode": "managed",
+          "type": "aws_ecr_repository",
+          "name": "foo",
+          "provider_config_key": "aws",
+          "expressions": {
+            "image_scanning_configuration": [
+              {
+                "scan_on_push": {
+                  "constant_value": true
+                }
+              }
+            ],
+            "image_tag_mutability": {
+              "constant_value": "MUTABLE"
+            },
+            "name": {
+              "constant_value": "bar"
+            }
+          },
+          "schema_version": 0
+        }
+      ],
       "module_calls": {
         "rds": {
           "source": "github.com/cds-snc/terraform-modules//rds",
@@ -4284,6 +4399,11 @@
                     "references": [
                       "data.aws_iam_policy_document.read_connection_string.json",
                       "data.aws_iam_policy_document.read_connection_string"
+                    ]
+                  },
+                  "tags": {
+                    "references": [
+                      "local.common_tags"
                     ]
                   }
                 },
@@ -4759,7 +4879,7 @@
             "variables": {
               "allow_major_version_upgrade": {
                 "default": false,
-                "description": "(Optional, default 'false') This flag allows RDS to perform a major engine upgrade. \u003cbr/\u003e **Please Note:** This could break things so make sure you know that your code is compatible with the new features in this version."
+                "description": "(Optional, default 'false') This flag allows RDS to perform a major engine upgrade. <br/> **Please Note:** This could break things so make sure you know that your code is compatible with the new features in this version."
               },
               "backup_retention_period": {
                 "description": "(Required) The amount of days to keep backups for."
@@ -4801,11 +4921,11 @@
               },
               "prevent_cluster_deletion": {
                 "default": true,
-                "description": "(Optional, default 'true') This flag prevents deletion of the RDS cluster. \u003cbr/\u003e **Please Note:** We cannot prevent deletion of RDS instances in the module, we recommend you add `lifecycle { prevent_deletion = true }` to the module to prevent instance deletion"
+                "description": "(Optional, default 'true') This flag prevents deletion of the RDS cluster. <br/> **Please Note:** We cannot prevent deletion of RDS instances in the module, we recommend you add `lifecycle { prevent_deletion = true }` to the module to prevent instance deletion"
               },
               "proxy_debug_logging": {
                 "default": false,
-                "description": "(Optional, default 'false') Allows the proxy to log debug information. \u003cbr/\u003e **Please Note:** This will include all sql commands and potential sensitive information"
+                "description": "(Optional, default 'false') Allows the proxy to log debug information. <br/> **Please Note:** This will include all sql commands and potential sensitive information"
               },
               "proxy_log_retention_in_days": {
                 "default": 14,
