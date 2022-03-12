@@ -1,2 +1,3 @@
 .terraform*
 plan.out
+input.json
