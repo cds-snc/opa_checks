@@ -12,6 +12,7 @@
 | Name | Description | Severity |
 | ---- | ----------- | -------- | 
 | Invalid effect | IAM Policy `Effect` is only `Approve` or `Deny`| DENY |
+| Lambda VPC ENI permission | A lambda attached to a VPC is missing the permissions to mange an ENI | DENY |
 | Postgres DB password | Postgres DB password is:<ul><li>greater than 8 characters</li><li>only has valid characters</li><li>is not on the reserved list</li></ul> | DENY |
 | Postgres DB username | Postgres DB username is:<ul><li>greater than 16 characters</li><li>only has valid characters</li><li>is not on the reserved list</li></ul> | DENY |
 | Postgres DB name | Postgres DB name is:<ul><li>is not on the reserved list</li></ul> | DENY |
