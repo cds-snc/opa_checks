@@ -18,6 +18,7 @@
 | Security group invalid ports | Deny if protocol is set to `-1` but the port range is not set to `0` | DENY |
 | Tagging | All resources that allow tags have a `CostCentre` and `Terraform` tag | WARN |
 | Unscoped IAM Service Roles | All IAM policies that have a service user as the `Principal` should have a condition limiting access to the account. (`sts:AssumeRole` actions are excepted) | WARN |
+| Unsupported Lambda runtime | Checks if the lambda runtime is unsupported | DENY |
 
 ## How to run tests
 
