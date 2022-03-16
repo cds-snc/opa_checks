@@ -65,3 +65,13 @@ test_no_dissallowed_characters {
 
 	count(r) == 0
 }
+
+test_no_pattern {
+	r := main.deny_cloudwatch_log_metric_pattern with input as {"resource_changes": [{
+		"address": "foo",
+		"type": "aws_cloudwatch_log_metric_filter",
+		"change": {"after": {}},
+	}]}
+
+	count(r) == 0
+}
