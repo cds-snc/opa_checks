@@ -3,7 +3,7 @@ package tests
 import data.main as main
 
 test_unbalanced_quotes {
-	r := main.deny_cloudwatch_log_metric_pattern with input as {"resource_changes": [{
+	r := main.warn_cloudwatch_log_metric_pattern with input as {"resource_changes": [{
 		"address": "foo",
 		"type": "aws_cloudwatch_log_metric_filter",
 		"change": {"after": {"pattern": "\" foo"}},
@@ -14,7 +14,7 @@ test_unbalanced_quotes {
 }
 
 test_dissallowed_characters_outside_quotes {
-	r := main.deny_cloudwatch_log_metric_pattern with input as {"resource_changes": [{
+	r := main.warn_cloudwatch_log_metric_pattern with input as {"resource_changes": [{
 		"address": "foo",
 		"type": "aws_cloudwatch_log_metric_filter",
 		"change": {"after": {"pattern": "! \" foo \""}},
@@ -25,7 +25,7 @@ test_dissallowed_characters_outside_quotes {
 }
 
 test_consecutive_quotes {
-	r := main.deny_cloudwatch_log_metric_pattern with input as {"resource_changes": [{
+	r := main.warn_cloudwatch_log_metric_pattern with input as {"resource_changes": [{
 		"address": "foo",
 		"type": "aws_cloudwatch_log_metric_filter",
 		"change": {"after": {"pattern": "foo \"\" bar"}},
@@ -36,7 +36,7 @@ test_consecutive_quotes {
 }
 
 test_original_case {
-	r := main.deny_cloudwatch_log_metric_pattern with input as {"resource_changes": [{
+	r := main.warn_cloudwatch_log_metric_pattern with input as {"resource_changes": [{
 		"address": "foo",
 		"type": "aws_cloudwatch_log_metric_filter",
 		"change": {"after": {"pattern": "/\"levelname\": \"ERROR\"/"}},
@@ -47,7 +47,7 @@ test_original_case {
 }
 
 test_dissallowed_characters_inside_quotes {
-	r := main.deny_cloudwatch_log_metric_pattern with input as {"resource_changes": [{
+	r := main.warn_cloudwatch_log_metric_pattern with input as {"resource_changes": [{
 		"address": "foo",
 		"type": "aws_cloudwatch_log_metric_filter",
 		"change": {"after": {"pattern": "\" !foo \""}},
@@ -57,7 +57,7 @@ test_dissallowed_characters_inside_quotes {
 }
 
 test_no_dissallowed_characters {
-	r := main.deny_cloudwatch_log_metric_pattern with input as {"resource_changes": [{
+	r := main.warn_cloudwatch_log_metric_pattern with input as {"resource_changes": [{
 		"address": "foo",
 		"type": "aws_cloudwatch_log_metric_filter",
 		"change": {"after": {"pattern": "hello this has no disallowed characters even _"}},
@@ -67,10 +67,30 @@ test_no_dissallowed_characters {
 }
 
 test_no_pattern {
-	r := main.deny_cloudwatch_log_metric_pattern with input as {"resource_changes": [{
+	r := main.warn_cloudwatch_log_metric_pattern with input as {"resource_changes": [{
 		"address": "foo",
 		"type": "aws_cloudwatch_log_metric_filter",
 		"change": {"after": {}},
+	}]}
+
+	count(r) == 0
+}
+
+test_curly_braces {
+	r := main.warn_cloudwatch_log_metric_pattern with input as {"resource_changes": [{
+		"address": "foo",
+		"type": "aws_cloudwatch_log_metric_filter",
+		"change": {"after": {"pattern": "{ $.delivery.providerResponse = \"Blocked as spam by phone carrier\" }"}},
+	}]}
+
+	count(r) == 0
+}
+
+test_brackets {
+	r := main.warn_cloudwatch_log_metric_pattern with input as {"resource_changes": [{
+		"address": "foo",
+		"type": "aws_cloudwatch_log_metric_filter",
+		"change": {"after": {"pattern": "[ foo ]"}},
 	}]}
 
 	count(r) == 0

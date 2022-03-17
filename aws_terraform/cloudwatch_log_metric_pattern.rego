@@ -33,6 +33,7 @@ cloudwatch_log_metric_pattern[r] = resources {
 		pattern = replace(pattern, "\\\"", "＂")
 
 		regex.match(`[^[:alnum:],_,\s]`, pattern)
+		not regex.match(`(^{.+}$|^\[.+\]$)`, pattern)
 		parts := split(pattern, "\"")
 		invalid_pattern(parts)
 	]
