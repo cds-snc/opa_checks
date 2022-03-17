@@ -12,7 +12,7 @@
 | Name | Description | Severity |
 | ---- | ----------- | -------- | 
 | API gateway integration URI | Checks if the URI is in the correct format if the API gateway integration has a type of: `AWS`, `AWS_PROXY`, `HTTP`, or `HTTP_PROXY` | DENY |
-| Cloudwatch log metric pattern | Checks if the Cloudwatch log metric pattern is valid | DENY |
+| Cloudwatch log metric pattern | Checks if the Cloudwatch log metric pattern is valid | WARN |
 | Container name spaces | Checks if ECS container definitions have a name with spaces in it | DENY |
 | Invalid effect | IAM Policy `Effect` is only `Approve` or `Deny`| DENY |
 | Lambda VPC ENI permission | A lambda attached to a VPC is missing the permissions to mange an ENI | DENY |

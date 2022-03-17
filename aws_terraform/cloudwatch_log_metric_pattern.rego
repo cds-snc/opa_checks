@@ -38,7 +38,7 @@ cloudwatch_log_metric_pattern[r] = resources {
 	]
 }
 
-deny_cloudwatch_log_metric_pattern[msg] {
+warn_cloudwatch_log_metric_pattern[msg] {
 	resources := cloudwatch_log_metric_pattern[_]
 	resources != []
 	msg := sprintf("Cloudwatch log metric pattern is invalid: %v", [resources])
