@@ -5,7 +5,7 @@ container_definition_template_with_trailing_comma[r] = resources {
 	resources := [resource |
 		resource := changes.address
 		changes.type == "aws_ecs_task_definition"
-		regex.match(`}\s*,+\s*]|]\s*,+\s*}`, changes.change.after.container_definitions)
+		regex.match(`}\s*,+\s*]|]\s*,+\s*}|}\s*,+\s*}|}\s*,+\s*\z|]\s*,+\s*\z|"\s*,+\s*]|"\s*,+\s*}|"\s*,+\s*\z`, changes.change.after.container_definitions)
 	]
 }
 
