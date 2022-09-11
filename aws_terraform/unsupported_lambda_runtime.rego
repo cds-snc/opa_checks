@@ -1,7 +1,7 @@
 package main
 
 valid_runtimes = {
-	"nodejs16.x"
+	"nodejs16.x",
 	"nodejs14.x",
 	"nodejs12.x",
 	"python3.9",
