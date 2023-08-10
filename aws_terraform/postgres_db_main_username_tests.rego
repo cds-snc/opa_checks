@@ -27,11 +27,11 @@ test_username_long {
 	r := main.deny_postgres_main_username_too_long with input as {"resource_changes": [{
 		"address": "foo",
 		"type": "aws_rds_cluster",
-		"change": {"after": {"master_username": "12345678901234567"}},
+		"change": {"after": {"master_username": "1234567890123456789012345678901234567890123456789012345678901234"}},
 	}]}
 
 	count(r) == 1
-	r[_] == "Postgresql main username > 16 characters: [\"foo\"]"
+	r[_] == "Postgresql main username > 63 characters: [\"foo\"]"
 }
 
 test_username_valid_length {
