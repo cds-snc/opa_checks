@@ -26,7 +26,7 @@ resource "aws_lambda_function" "test_lambda_with_good_runtime" {
 
   source_code_hash = filebase64sha256("mocks/test.zip")
 
-  runtime = "nodejs12.x"
+  runtime = "nodejs18.x"
 }
 
 resource "aws_lambda_function" "test_lambda_with_bad_runtime" {
@@ -37,7 +37,7 @@ resource "aws_lambda_function" "test_lambda_with_bad_runtime" {
 
   source_code_hash = filebase64sha256("mocks/test.zip")
 
-  runtime = "nodejs10.x"
+  runtime = "nodejs12.x"
 }
 
 resource "aws_iam_role" "iam_for_lambda_with_eni" {
@@ -73,7 +73,7 @@ resource "aws_lambda_function" "test_vpc_lambda_with_eni_policy" {
 
   source_code_hash = filebase64sha256("mocks/test.zip")
 
-  runtime = "nodejs12.x"
+  runtime = "nodejs16.x"
 
   vpc_config {
     security_group_ids = []
@@ -89,7 +89,7 @@ resource "aws_lambda_function" "test_vpc_lambda_with_missing_eni_policy" {
 
   source_code_hash = filebase64sha256("mocks/test.zip")
 
-  runtime = "nodejs12.x"
+  runtime = "nodejs16.x"
 
   vpc_config {
     security_group_ids = []
