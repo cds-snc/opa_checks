@@ -6,7 +6,7 @@ test_valid_runtime {
 	r := main.deny_invalid_runtime with input as {"resource_changes": [{
 		"address": "foo",
 		"type": "aws_lambda_function",
-		"change": {"after": {"package_type": "Zip", "runtime": "python3.6"}},
+		"change": {"after": {"package_type": "Zip", "runtime": "python3.11"}},
 	}]}
 
 	count(r) == 0
