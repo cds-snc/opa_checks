@@ -12,7 +12,7 @@ test_ssm_name_starts_with_aws {
 	}]}
 
 	count(r) == 1
-	r[_] == "SSM parameter name 'aws_param_name' should not start with 'aws' or 'ssm"
+	r[_] == "SSM parameter name 'aws_param_name' should not start with 'aws' or 'ssm' (case-insensitive)"
 }
 
 test_ssm_name_starts_with_ssm {
@@ -23,7 +23,29 @@ test_ssm_name_starts_with_ssm {
 	}]}
 
 	count(r) == 1
-	r[_] == "SSM parameter name 'ssm_param_name' should not start with 'aws' or 'ssm"
+	r[_] == "SSM parameter name 'ssm_param_name' should not start with 'aws' or 'ssm' (case-insensitive)"
+}
+
+test_ssm_name_starts_with_aws_caps {
+	# Expected to produce a violation message
+	r := main.deny_ssm_name_that_starts_with_aws_or_ssm with input as {"resource_changes": [{
+		"type": "aws_ssm_parameter",
+		"change": {"after": {"name": "AWS_param_name"}},
+	}]}
+
+	count(r) == 1
+	r[_] == "SSM parameter name 'AWS_param_name' should not start with 'aws' or 'ssm' (case-insensitive)"
+}
+
+test_ssm_name_starts_with_ssm_caps {
+	# Expected to produce a violation message
+	r := main.deny_ssm_name_that_starts_with_aws_or_ssm with input as {"resource_changes": [{
+		"type": "aws_ssm_parameter",
+		"change": {"after": {"name": "SSM_param_name"}},
+	}]}
+
+	count(r) == 1
+	r[_] == "SSM parameter name 'SSM_param_name' should not start with 'aws' or 'ssm' (case-insensitive)"
 }
 
 test_ssm_name_does_not_start_with_aws_or_ssm {
