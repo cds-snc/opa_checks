@@ -77,3 +77,19 @@ test_ssm_name_is_empty {
 
 	count(r) == 0
 }
+
+test_broken_plan {
+	# Expected not to produce a violation message
+	r := main.deny_ssm_name_that_starts_with_aws_or_ssm with input as {"resource_changes": [
+		{
+			"type": "aws_ssm_parameter",
+			"change": {"after": {"name": "ENVIRONMENT_VARIABLES"}},
+		},
+		{
+			"type": "aws_kinesis_firehose_delivery_stream",
+			"change": {"after": {"name": "aws-waf-logs-scan-files"}},
+		},
+	]}
+
+	count(r) == 0
+}
