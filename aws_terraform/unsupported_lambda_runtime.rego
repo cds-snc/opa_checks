@@ -1,16 +1,22 @@
 package main
 
 valid_runtimes = {
+	"dotnet7",
+	"dotnet6",
+	"nodejs20.x",
 	"nodejs18.x",
 	"nodejs16.x",
-	"nodejs14.x",
 	"python3.11",
 	"python3.10",
 	"python3.9",
 	"python3.8",
-	"python3.7",
+	"ruby3.2",
 	"ruby2.7",
+	"java21",
+	"java17",
 	"java11",
+	"java8.al2",
+	"java8",
 	"go1.x",
 }
 
