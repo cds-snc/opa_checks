@@ -6,7 +6,7 @@ valid_runtimes = {
 	"nodejs20.x",
 	"nodejs18.x",
 	"nodejs16.x",
-	"python3.12",	
+	"python3.12",
 	"python3.11",
 	"python3.10",
 	"python3.9",
