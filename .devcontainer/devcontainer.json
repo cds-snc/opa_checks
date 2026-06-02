@@ -6,11 +6,11 @@
 		"dockerfile": "Dockerfile",
 		// Update 'VARIANT' to pick an Debian version: bullseye, buster, stretch
 		"args": {
-			"VARIANT": "buster",
+			"VARIANT": "bullseye",
 			"FREGOT_VERSION": "v0.13.4",
 			"OPA_VERSION": "v0.38.0",
 			"CONFTEST_VERSION": "0.27.0",
-			"TERRAFORM_VERSION": "1.0.6"
+			"TERRAFORM_VERSION": "1.5.7"
 		}
 	},
 	"containerEnv": {
