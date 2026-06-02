@@ -40,6 +40,13 @@ resource "aws_lambda_function" "test_lambda_with_bad_runtime" {
   runtime = "nodejs12.x"
 }
 
+resource "aws_lambda_permission" "test_lambda_with_public_principal" {
+  statement_id  = "AllowPublicInvokeFunction"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.test_lambda_with_good_runtime.function_name
+  principal     = "*"
+}
+
 resource "aws_iam_role" "iam_for_lambda_with_eni" {
   name = "iam_for_lambda_with_eni"
 
