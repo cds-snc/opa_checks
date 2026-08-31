@@ -16,7 +16,7 @@ test_invalid_runtime {
 	r := main.deny_invalid_runtime with input as {"resource_changes": [{
 		"address": "foo",
 		"type": "aws_lambda_function",
-		"change": {"after": {"package_type": "Zip", "runtime": "python2.7"}},
+		"change": {"after": {"package_type": "Zip", "runtime": "dotnet7"}},
 	}]}
 
 	r[_] == "Lambda function has invalid runtime: [\"foo\"]"

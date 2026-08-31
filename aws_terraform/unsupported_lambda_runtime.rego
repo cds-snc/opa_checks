@@ -46,7 +46,7 @@ valid_runtimes = {
 	"python3.14",
 	"java25",
 	"dotnet10",
-	"ruby4.0"
+	"ruby4.0",
 }
 
 lambdas_with_invalid_runtimes[r] = resources {
