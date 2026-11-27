@@ -22,6 +22,7 @@
 | Postgres DB username | Postgres DB username is:<ul><li>greater than 16 characters</li><li>only has valid characters</li><li>is not on the reserved list</li></ul> | DENY |
 | Postgres DB name | Postgres DB name is:<ul><li>is not on the reserved list</li></ul> | DENY |
 | Security group invalid ports | Deny if protocol is set to `-1` but the port range is not set to `0` | DENY |
+| SNS topic encryption | SNS topics must set `kms_master_key_id` to a customer managed or AWS managed KMS key | DENY |
 | Tagging | All resources that allow tags have a `CostCentre` and `Terraform` tag | WARN |
 | Unscoped IAM Service Roles | All IAM policies that have a service user as the `Principal` should have a condition limiting access to the account. (`sts:AssumeRole` actions are excepted) | WARN |
 | Unsupported Lambda runtime | Checks if the lambda runtime is unsupported | DENY |
